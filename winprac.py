@@ -95,7 +95,7 @@ def best_channel_plan(df):
     channels_df = channels_df.sort_values(by=['% of target'])
     return channels_df
  
-def best_channel_convertion(df):
+def best_channel_conversion(df):
     channels_df = df[['Sales channel', 'Status' ]]
     channels = channels_df.groupby(['Sales channel']).count()
     channels_finish = channels_df.loc[df['Status'] == 'Finished']
@@ -105,8 +105,8 @@ def best_channel_convertion(df):
     for num in range(len(channels)):
         proc = (channels['Status finish'].iloc[num]/channels['Status'].iloc[num])*100
         done_target_proc.append(np.round(proc)) 
-    channels['% of convertion'] = done_target_proc
-    channels = channels.sort_values(by=['% of convertion'])
+    channels['% of conversion'] = done_target_proc
+    channels = channels.sort_values(by=['% of conversion'])
     return channels
 
 def best_channel_plan_duration(df):
@@ -229,7 +229,7 @@ def update_date_graph (option):
         proc_targ = best_region(df)['% of target']
         figure={
             'data': [
-                {'x': city, 'y': proc_targ, 'type': 'bar', 'name': u'Montréal'}
+                {'x': city, 'y': proc_targ, 'type': 'bar'}
                 ],
             'layout': {
                 'title': '% of target'
@@ -250,15 +250,15 @@ def update_date_graph (option):
                 }
         return figure 
     if option == 'Best channel by conversion':
-        print (best_channel_convertion(df))
-        channel = best_channel_convertion(df).index.tolist()
-        proc_targ = best_channel_convertion(df)['% of convertion']
+        print (best_channel_conversion(df))
+        channel = best_channel_conversion(df).index.tolist()
+        proc_targ = best_channel_conversion(df)['% of conversion']
         figure={
             'data': [
                 {'x': channel, 'y': proc_targ, 'type': 'bar'}
                 ],
             'layout': {
-                'title': '% of convertion'
+                'title': '% of conversion'
                     }
                 }
         return figure     
