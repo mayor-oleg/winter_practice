@@ -10,4 +10,4 @@ pandas==1.1.4
 dash==1.13.3
 scikit_learn==0.23.2
 gunicorn
-xlrd
+xlrd >= 1.0.0
